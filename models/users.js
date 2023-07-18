@@ -1,29 +1,31 @@
 const { postgresql } = require('../databases/postgresql')
 
+
 /**
  * Get an specific user
  * @param {number} pk_user User primary key
- * @returns {{pk_user: 1, name: "Juan", status: true}}
+ * @returns {{pk_user: 1, name: "User", status: true}}
  */
 const getUser = (pk_user) => {
-
-    let user = postgresql.public.one(`
+    const user = postgresql.public.one(`
         select * 
         from users
         where pk_user = ${pk_user}`
     );
+
     return user
 }
+
 
 /**
  * Create an user
  * @param {number} pk_user User primary key
  * @param {string} name User name
- * @returns {{pk_user: 1, name: "Juan", status: true}}
+ * @returns {{pk_user: 1, name: "User", status: true}}
  */
 const createUser = (pk_user, name, status = true) => {
     try {
-        let user = postgresql.public.one(`
+        const user = postgresql.public.one(`
             insert into users 
             values (
                 ${pk_user}, 
@@ -31,12 +33,14 @@ const createUser = (pk_user, name, status = true) => {
                 ${status}) 
             returning *;`
         );
+
         return user
     }
     catch (e) {
         throw new Error(e)
     }
 }
+
 
 /**
  * Update an specific user
@@ -54,12 +58,14 @@ const updateUser = (pk_user, name, status) => {
             where pk_user = ${pk_user} 
             returning *;`
         );
+
         return user
     }
     catch (e) {
         throw new Error(e)
     }
 }
+
 
 /**
  * Delete an specific user
@@ -73,12 +79,14 @@ const deleteUser = (pk_user) => {
             where pk_user = ${pk_user} 
             returning *;`
         );
+
         return { pk_user: user.pk_user }
     }
     catch (e) {
         throw new Error(e)
     }
 }
+
 
 module.exports = {
     getUser,

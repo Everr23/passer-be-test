@@ -1,9 +1,10 @@
 const transactionsModel = require('../models/transactions')
 
+
 /**
- * Get an especific transaction
+ * Get a especific transaction
  * @param {number} pk_transaction Transaction id
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const getTransaction = async (pk_transaction) => {
     try {
@@ -13,10 +14,11 @@ const getTransaction = async (pk_transaction) => {
     }
 }
 
+
 /**
  * Get transactions by user
  * @param {number} fk_user User id
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const getTransactionsByUser = async (fk_user) => {
     try {
@@ -26,13 +28,14 @@ const getTransactionsByUser = async (fk_user) => {
     }
 }
 
+
 /**
- * Create an transaction
+ * Create a transaction
  * @param {number} pk_transaction Transaction id
  * @param {number} fk_user User id
  * @param {string} description Transaction description
  * @param {number} amount Transaction amount
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const createTransaction = async (pk_transaction, fk_user, description, amount) => {
     try {
@@ -42,13 +45,14 @@ const createTransaction = async (pk_transaction, fk_user, description, amount) =
     }
 }
 
+
 /**
-* Update an transaction
+* Update a transaction
  * @param {number} pk_transaction Transaction id
  * @param {number} fk_user User id
  * @param {string} description Transaction description
  * @param {number} amount Transaction amount
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const updateTransaction = async (pk_transaction, fk_user, description, amount) => {
     try {
@@ -57,6 +61,7 @@ const updateTransaction = async (pk_transaction, fk_user, description, amount) =
         throw new Error(e.message)
     }
 }
+
 
 module.exports = {
     getTransaction,

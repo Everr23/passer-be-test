@@ -1,24 +1,26 @@
 const { postgresql } = require('../databases/postgresql')
 
+
 /**
- * Get an especific transaction
+ * Get a especific transaction
  * @param {number} pk_transaction Transaction id
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const getTransaction = (pk_transaction) => {
-
     const transaction = postgresql.public.one(`
         select * 
         from transactions
         where pk_transaction = ${pk_transaction}`
     );
+
     return transaction
 }
+
 
 /**
  * Get transactions by user
  * @param {number} fk_user User id
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const getTransactionsByUser = (fk_user) => {
     const transactionsList = postgresql.public.many(`
@@ -26,16 +28,18 @@ const getTransactionsByUser = (fk_user) => {
         from transactions
         where fk_user = ${fk_user}`
     );
+
     return transactionsList
 }
 
+
 /**
- * Create an transaction
+ * Create a transaction
  * @param {number} pk_transaction Transaction id
  * @param {number} fk_user User id
  * @param {string} description Transaction description
  * @param {number} amount Transaction amount
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const createTransaction = (pk_transaction, fk_user, description, amount) => {
     try {
@@ -48,6 +52,7 @@ const createTransaction = (pk_transaction, fk_user, description, amount) => {
                 ${amount}) 
             returning *;`
         );
+
         return transaction
     }
     catch (e) {
@@ -55,13 +60,14 @@ const createTransaction = (pk_transaction, fk_user, description, amount) => {
     }
 }
 
+
 /**
-* Update an specific transaction
+* Update a specific transaction
  * @param {number} pk_transaction Transaction id
  * @param {number} fk_user User id
  * @param {string} description Transaction description
  * @param {number} amount Transaction amount
- * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1000}}
  */
 const updateTransaction = (pk_transaction, fk_user, description, amount) => {
     try {
@@ -74,12 +80,14 @@ const updateTransaction = (pk_transaction, fk_user, description, amount) => {
             where pk_transaction = ${pk_transaction}
             returning *;`
         );
+
         return transaction
     }
     catch (e) {
         throw new Error(e)
     }
 }
+
 
 module.exports = {
     getTransaction,

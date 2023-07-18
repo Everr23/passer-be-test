@@ -9,7 +9,8 @@ describe('transactions main functions', () => {
     });
 
 
-    // getTransactionsByUser function test (jest matching objects in array)
+    // getTransactionsByUser function test
+    // valida que la lista de objetos del response contengan fk_user = 1 (jest matching objects in array)
     test('getTransactionsByUser with {fk_user: 1}', async () => {
         const transactionsList = await transactions.getTransactionsByUser(1)
         expect(transactionsList).toEqual(

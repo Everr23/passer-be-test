@@ -36,7 +36,7 @@ const updateUser = async (req, res, next) => {
     const {name, status } = req.body
 
     try {
-        let user = users.updateUser(pk_user, name, status)
+        const user = users.updateUser(pk_user, name, status)
         res.status(200).send(user)
         next()
 
@@ -51,7 +51,7 @@ const deleteUser = async (req, res, next) => {
     const { pk_user } = req.params
 
     try {
-        let user = await users.deleteUser(pk_user)
+        const user = await users.deleteUser(pk_user)
         res.status(200).send(user)
         next()
 

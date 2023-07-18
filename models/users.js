@@ -7,7 +7,11 @@ const { postgresql } = require('../databases/postgresql')
  */
 const getUser = (pk_user) => {
 
-    let user = postgresql.public.one(`select * from users where pk_user = ${pk_user}`);
+    let user = postgresql.public.one(`
+        select * 
+        from users
+        where pk_user = ${pk_user}`
+    );
     return user
 }
 
@@ -19,7 +23,14 @@ const getUser = (pk_user) => {
  */
 const createUser = (pk_user, name, status = true) => {
     try {
-        let user = postgresql.public.one(`insert into users values (${pk_user}, '${name}', ${status}) returning *;`);
+        let user = postgresql.public.one(`
+            insert into users 
+            values (
+                ${pk_user}, 
+                '${name}', 
+                ${status}) 
+            returning *;`
+        );
         return user
     }
     catch (e) {
@@ -36,7 +47,13 @@ const createUser = (pk_user, name, status = true) => {
  */
 const updateUser = (pk_user, name, status) => {
     try {
-        const user = postgresql.public.one(`update users set name = '${name}', status = ${status} where pk_user = ${pk_user} returning *;`);
+        const user = postgresql.public.one(`
+            update users set 
+                name = '${name}', 
+                status = ${status} 
+            where pk_user = ${pk_user} 
+            returning *;`
+        );
         return user
     }
     catch (e) {
@@ -51,7 +68,11 @@ const updateUser = (pk_user, name, status) => {
  */
 const deleteUser = (pk_user) => {
     try {
-        const user = postgresql.public.one(`delete from users where pk_user = ${pk_user} returning *;`);
+        const user = postgresql.public.one(`
+            delete from users 
+            where pk_user = ${pk_user} 
+            returning *;`
+        );
         return { pk_user: user.pk_user }
     }
     catch (e) {

@@ -13,6 +13,7 @@ router.get('/users/:pk_user', users.getUser)
 
 //transactions routes
 router.get('/transactions/:pk_transaction', transactions.getTransaction)
+    .get('/transactions', transactions.getTransactionsByUser)
     .post('/transactions/', transactions.createTransaction)
     .put('/transactions/:pk_transaction', transactions.updateTransaction)
 

@@ -1,16 +1,46 @@
 const transactions = require('../../services/transactions')
 
 describe('transactions main functions', () => {
+    
     // getTransaction function test
     test('getTransaction with {pk_transaction: 1}', async () => {
-        let transaction = await transactions.getTransaction(1)
+        const transaction = await transactions.getTransaction(1)
         expect(transaction.pk_transaction).toBe(1);
+    });
+
+    // getTransactionsByUser function test (jest matching objects in array)
+    test('getTransactionsByUser with {fk_user: 1}', async () => {
+        const transactionsList = await transactions.getTransactionsByUser(1)
+        expect(transactionsList).toEqual(
+            expect.arrayContaining([     
+                expect.objectContaining({   
+                    fk_user: 1               
+                })
+            ])
+        )
     });
 
     // createTransaction function test
     test('createTransaction with {pk_transaction: 5, fk_user: 1, description: "Test create transaction", amount: 9876.54}', async () => {
-        let transaction = await transactions.createTransaction(5, 1, "Test create transaction", 9876.54);
+        const transaction = await transactions.createTransaction(5, 1, "Test create transaction", 9876.54);
         expect(transaction.pk_transaction).toBe(5);
+    });
+
+    // updateTransaction function test
+    test('updateTransaction with {pk_transaction: 5, fk_user: 1, description: "Test update transaction", amount: 9876.54}', async () => {
+        const dataToTest = {
+            pk_transaction: 1,
+            fk_user: 1, 
+            description: "Test update transaction", 
+            amount: 9876.54
+        };
+        const transaction = await transactions.updateTransaction(
+            dataToTest.pk_transaction, 
+            dataToTest.fk_user, 
+            dataToTest.description, 
+            dataToTest.amount
+        );
+        expect(transaction).toMatchObject(dataToTest);
     });
 
 })

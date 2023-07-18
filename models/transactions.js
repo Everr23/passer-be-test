@@ -7,12 +7,26 @@ const { postgresql } = require('../databases/postgresql')
  */
 const getTransaction = (pk_transaction) => {
 
-    let transaction = postgresql.public.one(`
+    const transaction = postgresql.public.one(`
         select * 
         from transactions
         where pk_transaction = ${pk_transaction}`
     );
     return transaction
+}
+
+/**
+ * Get transactions by user
+ * @param {number} fk_user User id
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Transaction description", amount: 1234.56}}
+ */
+const getTransactionsByUser = (fk_user) => {
+    const transactionsList = postgresql.public.many(`
+        select * 
+        from transactions
+        where fk_user = ${fk_user}`
+    );
+    return transactionsList
 }
 
 /**
@@ -25,7 +39,7 @@ const getTransaction = (pk_transaction) => {
  */
 const createTransaction = (pk_transaction, fk_user, description, amount) => {
     try {
-        let transaction = postgresql.public.one(`
+        const transaction = postgresql.public.one(`
             insert into transactions 
             values (
                 ${pk_transaction}, 
@@ -69,6 +83,7 @@ const updateTransaction = (pk_transaction, fk_user, description, amount) => {
 
 module.exports = {
     getTransaction,
+    getTransactionsByUser,
     createTransaction,
     updateTransaction
 }

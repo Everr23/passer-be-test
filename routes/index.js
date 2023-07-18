@@ -12,6 +12,7 @@ router.get('/users/:pk_user', users.getUser)
     .delete('/users/:pk_user', users.deleteUser)
 
 //transactions routes
-router.post('/transactions/', transactions.createTransaction)
+router.get('/transactions/:pk_transaction', transactions.getTransaction)
+    .post('/transactions/', transactions.createTransaction)
 
 module.exports = router

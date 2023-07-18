@@ -36,7 +36,8 @@ const createUser = (pk_user, name, status = true) => {
  */
 const updateUser = (pk_user, name, status) => {
     try {
-        let user = postgresql.public.one(`update users set name = '${name}', status = ${status} where pk_user = ${pk_user} returning *;`);
+        const user = postgresql.public.one(`update users set name = '${name}', status = ${status} where pk_user = ${pk_user} returning *;`);
+        console.log(user)
         return user
     }
     catch (e) {
@@ -51,7 +52,7 @@ const updateUser = (pk_user, name, status) => {
  */
 const deleteUser = (pk_user) => {
     try {
-        const  user = postgresql.public.one(`delete from users where pk_user = ${pk_user} returning *;`);
+        const user = postgresql.public.one(`delete from users where pk_user = ${pk_user} returning *;`);
         return { pk_user: user.pk_user }
     }
     catch (e) {
@@ -60,8 +61,8 @@ const deleteUser = (pk_user) => {
 }
 
 module.exports = {
-    createUser,
     getUser,
+    createUser,
     updateUser,
     deleteUser
 }
